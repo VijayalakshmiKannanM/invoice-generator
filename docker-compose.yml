@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=file:/app/prisma/dev.db
+      - NEXTAUTH_SECRET=docker-secret-key-change-in-production
+      - NEXTAUTH_URL=http://localhost:3000
+      - NEXT_PUBLIC_APP_NAME=Invoice Generator
+    volumes:
+      - sqlite-data:/app/prisma
+    restart: unless-stopped
+
+volumes:
+  sqlite-data:
