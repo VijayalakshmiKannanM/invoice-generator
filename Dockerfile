@@ -16,6 +16,9 @@ RUN npx prisma generate
 # Copy source code
 COPY . .
 
+# Ensure public directory exists for runner stage
+RUN mkdir -p public
+
 # Build the application
 RUN npm run build
 
